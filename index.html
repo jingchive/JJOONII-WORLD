@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio JJOONII</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Asta+Sans:wght@300&family=Onest:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div id="floating-nav">
+  <div id="nav-links">
+    <button class="nav-btn" onclick="location.href='about.html'">About</button>
+    <button class="nav-btn" onclick="location.href='work.html'">Work</button>
+    <button class="nav-btn" onclick="location.href='record.html'">Record</button>
+  </div>
+</div>
+  <div id="project-info" class="hidden">
+  <h2 id="p-name"></h2>
+  <p id="p-meta"></p>
+</div>
+  <button id="resetBtn">Reset View</button>
+  <script src="script.js"></script>
+</body>
+</html>

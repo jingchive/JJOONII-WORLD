@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Work – JJOONII</title>
+  <link rel="stylesheet" href="work.css" />
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Asta+Sans:wght@300&family=Onest:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <!-- 페이지 헤더(선택) -->
+  <header class="page-header">
+    <nav class="work-nav">
+      <a href="about.html">About</a>
+      <a class="active" href="work.html">Work</a>
+      <a href="record.html">Record</a>
+    </nav>
+  </header>
+  
+  <!-- 좌상단 20% 축소 구(클릭 시 메인으로) -->
+  <a id="mini-sphere-link" href="index.html" aria-label="Back to main (Home)">
+    <canvas id="mini-sphere"></canvas>
+  </a>
+
+
+
+  <!-- 그리드: 한 행에 2개, 1400×1120 비율 -->
+  <main class="work-grid">
+    <!-- 카드 1 -->
+    <a class="work-card" href="projects/architen-website.html">
+      <figure class="thumb">
+        <img src="./projectimages/ArchitenWeb.jpg" alt="Architen New Website" />
+      </figure>
+      <h3 class="title">Architen New Website</h3>
+    </a>
+
+    <!-- 카드 2 -->
+    <a class="work-card" href="projects/shift-plus-one.html">
+      <figure class="thumb">
+        <img src="./projectimages/Architen-Shift+1Web.jpg" alt="Shift+1 Web Archive" />
+      </figure>
+      <h3 class="title">Shift+1 Web Archive</h3>
+    </a>
+
+    <!-- 카드 3 -->
+    <a class="work-card" href="projects/coilhaus.html">
+      <figure class="thumb">
+        <img src="./projectimages/coilhaus.jpg" alt="COILHAUS" />
+      </figure>
+      <h3 class="title">COILHAUS</h3>
+    </a>
+
+    <!-- 카드 4 -->
+    <a class="work-card" href="projects/hhhh-music-complex.html">
+      <figure class="thumb">
+        <img src="./projectimages/hhhh.jpg" alt="HHHH Music Complex" />
+      </figure>
+      <h3 class="title">HHHH Music Complex</h3>
+    </a>
+
+    <!-- 카드 5 -->
+    <a class="work-card" href="projects/lets-siso.html">
+      <figure class="thumb">
+        <img src="./projectimages/let's-siso.jpg" alt="Let's SiSo" />
+      </figure>
+      <h3 class="title">Let's SiSo</h3>
+    </a>
+
+    <!-- 필요 시 더 추가 -->
+  </main>
+
+  <script src="work.js"></script>
+</body>
+</html>
