@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Portfolio JJOONII</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
   <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Asta+Sans:wght@300&family=Onest:wght@700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Asta+Sans:wght@300&family=Onest:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* 클릭 막힘 방지(메인 전용 최소 보정) */
+    #bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    #floating-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;}
+    #nav-links{display:flex;gap:12px;}
+    #nav-links a.nav-btn{display:inline-block;padding:8px 14px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;text-decoration:none;cursor:pointer}
+    #nav-links a.nav-btn:hover{background:rgba(255,255,255,.2)}
+    #project-info{position:fixed;left:50%;transform:translateX(-50%);z-index:800;margin-top:90px}
+    #resetBtn{position:fixed;right:20px;bottom:20px;z-index:900}
+  </style>
 </head>
 <body>
+  <!-- 배경 캔버스: 시각만, 클릭 차단 -->
   <canvas id="bg"></canvas>
-  <div id="floating-nav">
-  <div id="nav-links">
-    <button class="nav-btn" onclick="location.href='about.html'">About</button>
-    <button class="nav-btn" onclick="location.href='work.html'">Work</button>
-    <button class="nav-btn" onclick="location.href='record.html'">Record</button>
+
+  <!-- 네비게이션: 실제 링크 -->
+  <div id="floating-nav" role="navigation" aria-label="Main">
+    <div id="nav-links">
+      <a class="nav-btn" href="about.html">About</a>
+      <a class="nav-btn" href="work.html">Work</a>
+      <a class="nav-btn" href="record.html">Record</a>
+    </div>
   </div>
-</div>
+
+  <!-- 프로젝트 정보 패널 -->
   <div id="project-info" class="hidden">
-  <h2 id="p-name"></h2>
-  <p id="p-meta"></p>
-</div>
-  <button id="resetBtn">Reset View</button>
+    <h2 id="p-name"></h2>
+    <p id="p-meta"></p>
+  </div>
+
+  <!-- 뷰 초기화 -->
+  <button id="resetBtn" type="button">Reset View</button>
+
   <script src="script.js"></script>
 </body>
 </html>
+
