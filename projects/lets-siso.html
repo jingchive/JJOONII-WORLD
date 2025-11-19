@@ -49,91 +49,108 @@
       background:rgba(255,255,255,.25);
     }
 
-    /* 가로 스크롤 영역 (데스크톱) */
-    .project-viewport{
-      position:fixed;
-      inset:0;
-      padding-top:58px; /* 상단바 높이만큼 내려줌 */
-      display:grid;
-      grid-auto-flow:column;
-      grid-auto-columns:100vw; /* 한 패널 = 한 화면 폭 */
-      align-items:stretch;
-      overflow-x:auto;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scrollbar-width:thin;
-    }
-    .panel{
-      height:calc(100dvh - 58px);
-      padding:0 var(--gap);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-right:1px solid var(--line);
-      scroll-snap-align:start;
-    }
-    .panel:last-child{border-right:none;}
+    /* 전체 뷰포트: 화면 가득 + 상단 네비 높이만큼 패딩 */
+.project-viewport{
+  position: fixed;
+  inset: 0;
+  padding-top: 58px; /* topbar 높이 */
+}
 
-    /* 히어로 패널 */
-    .hero-panel{
-      background:rgba(255,255,255,.04);
-    }
-    .hero-inner{
-      max-width:900px;
-      text-align:left;
-    }
-    .hero-title{
-      margin:0 0 8px 0;
-      font-size:38px;
-      letter-spacing:.2px;
-    }
-    .hero-meta{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
+/* 하나의 프로젝트용 패널 (세로로 30/70 나누기) */
+.project-panel{
+  height: calc(100dvh - 58px);
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;
+}
 
-    /* 이미지 패널 */
-    .frame{
-      width:min(1400px,84vw);
-      aspect-ratio:1400 / 1120;
-      margin:0;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-    }
-    .frame img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+/* 상단 30% : 프로젝트 정보 고정 영역 */
+.project-header{
+  flex: 0 0 30%;
+  max-height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-    /* 텍스트 설명 패널 */
-    .text-panel{padding:0 calc(var(--gap)*2);}
-    .text-wrap{
-      max-width:760px;
-    }
-    .text-wrap h2{
-      margin:0 0 12px 0;
-      font-size:26px;
-    }
-    .text-wrap p{
-      margin:0 0 12px 0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-    .text-wrap ul{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
+.hero-title{
+  margin: 0 0 4px 0;
+  font-size: 32px;
+}
+.hero-meta{
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+.hero-desc{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* 하단 70% : 이미지 스트립 (좌우 스크롤) */
+.project-strip{
+  flex: 1 1 70%;
+  min-height: 0;
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+/* 각 이미지 카드 */
+.project-strip .frame{
+  flex: 0 0 auto;
+  height: 100%;
+  aspect-ratio: 1400 / 1120;
+  margin: 0;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+.project-strip .frame img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 모바일: 위 텍스트 + 아래 세로 이미지 리스트로 전환 */
+@media (max-width: 900px){
+  .project-viewport{
+    position: relative;
+    padding-top: 58px;
+  }
+  .project-panel{
+    height: auto;
+    min-height: auto;
+    padding: 24px 16px 40px;
+  }
+  .project-header{
+    flex: 0 0 auto;
+    max-height: none;
+    margin-bottom: 16px;
+  }
+  .project-strip{
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: none;
+  }
+  .project-strip .frame{
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+}
 
     /* 인디케이터(선택) */
     .pager{
@@ -146,79 +163,6 @@
       background:var(--line);
       pointer-events:none;
     }
-
-    /* 모바일: 세로 스크롤로 전환 */
-    @media (max-width:900px){
-      .project-viewport{
-        position:relative;
-        padding-top:58px;
-        display:block;
-        overflow-x:hidden;
-        overflow-y:auto;
-        scroll-snap-type:y proximity;
-      }
-      .panel.panel-with-header{
-    min-height: auto;
-  }
-  .panel-header{
-    flex: 0 0 auto;
-    max-height: none;
-    padding: 16px 0;
-  }
-  .panel-body{
-    flex: 0 0 auto;
-  }
-  .panel-with-header .frame{
-    height: auto;
-  }
-      .panel:last-child{border-bottom:none;}
-      .frame{
-        width:100%;
-        max-width:100%;
-        aspect-ratio:auto;
-      }
-      .pager{display:none;}
-      .hero-title{font-size:30px;}
-    }
-    /* 텍스트 30% + 이미지 70% 레이아웃용 */
-.panel.panel-with-header{
-  flex-direction: column;      /* 위아래로 쌓기 */
-  align-items: stretch;
-}
-
-.panel-header{
-  flex: 0 0 30%;               /* 높이의 30% 고정 */
-  max-height: 30%;
-  padding: 24px 0 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;   /* 텍스트를 아래쪽에 모으기 (레퍼런스 느낌) */
-}
-
-.panel-title{
-  margin: 0 0 4px 0;
-  font-size: 22px;
-}
-
-.panel-meta{
-  margin: 0 0 8px 0;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-.panel-desc{
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
-  opacity: 0.9;
-}
-
-.panel-body{
-  flex: 1 1 70%;               /* 나머지 70% 차지 */
-  min-height: 0;
-  display: flex;
-  align-items: stretch;
-}
 
 /* 이 패널 안에서는 이미지가 영역을 꽉 채우도록 */
 .panel-with-header .frame{
@@ -239,51 +183,35 @@
     </nav>
   </header>
 
-  <!-- 가로 → 모바일에서는 세로로 바뀌는 뷰포트 -->
   <main class="project-viewport">
-    <!-- 패널 1: 히어로 -->
-    <section class="panel panel-with-header">
-  <div class="panel-header">
-    <h2 class="panel-title">Let’s SiSo</h2>
-    <p class="panel-meta">2025 · Branding · Web</p>
-    <p class="panel-desc">
-    학창시절 지나온 학교의 규칙들, 시험들을 떠올리며 개인의 ‘다름’을 ‘틀림’이 아닌 다른 것으로 인정할 수 있게 도와주는 공간이어야 한다고 생각했다. 나와 너의 영역을 구별하는 가구가 아닌 ‘짝꿍’이 있어야만 제대로 사용할 수 있는 공간이 된다면 어떨까? 처음에는 서로의 무게, 자세, 습관 등의 차이로 인해 한 쪽으로 기울어지겠지만 두 사람이 마주보며 함께 쓰는 공간을 잘 쓰기 위해 맞춰나갈 때 비로소 완성되는 이 오브제를 통해 ‘다름'을 존중하는 하나의 방식을 제시하였다.
-    </p>
-  </div>
-  <div class="panel-body">
-    <figure class="frame">
-      <img src="../projectimages/let's-siso/1.jpg" alt="Let’s SiSo – Overview" />
-    </figure>
-  </div>
-</section>
+  <section class="project-panel">
+    <!-- 상단 30% : 고정 정보 -->
+    <div class="project-header">
+      <h1 class="hero-title">Let’s SiSo</h1>
+      <p class="hero-meta">2025 · Furniture · Exhibition</p>
+      <p class="hero-desc">
+      학교는 어떤 공간이어야하는가? 우리는 학창시절 지나온 학교의 규칙들, 시험들을 떠올리며 개인의 ‘다름’을 ‘틀림’이 아닌 다른 것으로 인정할 수 있게 도와주는 공간이어야 한다고 생각했다. 나는 그 방법을 제시하고자 기존의 책걸상을 새로운 시선으로 바라보았다. 나와 너의 영역을 구별하는 가구가 아닌 ‘짝꿍’이 있어야만 제대로 사용할 수 있는 공간이 된다면 어떨까? 처음에는 서로의 무게, 자세, 습관 등의 차이로 인해 한 쪽으로 기울어지겠지만 두 사람이 마주보며 함께 쓰는 공간을 잘 쓰기 위해 맞춰나갈 때 비로소 완성되는 이 오브제를 통해 ‘다름'을 존중하는 하나의 방식을 제시하였다.
+      </p>
+    </div>
 
-    <!-- 패널 2: 큰 이미지 (지금은 테스트로 메인 썸네일 재사용) -->
-    <section class="panel">
+    <!-- 하단 70% : 관련 이미지들이 연속으로 이어지는 구간 -->
+    <div class="project-strip">
       <figure class="frame">
-        <img src="../projectimages/let's-siso.jpg" alt="Let’s SiSo – Overview" />
+        <img src="../projectimages/lets-siso/1.jpg" alt="Let’s SiSo – Overview 1" />
       </figure>
-    </section>
 
-    <!-- 패널 3: 설명 -->
-    <section class="panel text-panel">
-      <div class="text-wrap">
-        <h2>Concept</h2>
-        <p>사용자 흐름을 단순화하고, 반복 사용 행동을 강화하는 모듈형 UI를 설계했습니다.</p>
-        <ul>
-          <li>Atomic 컴포넌트 시스템</li>
-          <li>접근성(Contrast / Focus) 준수</li>
-          <li>반응형 비주얼 우선 레이아웃</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- 패널 4: 또 다른 이미지 (필요하면 나중에 다른 이미지로 교체) -->
-    <section class="panel">
       <figure class="frame">
-        <img src="../projectimages/let's-siso.jpg" alt="Let’s SiSo – Responsive View" />
+        <img src="../projectimages/lets-siso/2.jpg" alt="Let’s SiSo – Detail 2" />
       </figure>
-    </section>
-  </main>
+
+      <figure class="frame">
+        <img src="../projectimages/lets-siso/3.jpg" alt="Let’s SiSo – Mobile" />
+      </figure>
+
+      <!-- 필요하면 계속 figure 추가만 하면 됨 -->
+    </div>
+  </section>
+</main>
 
   <div class="pager" aria-hidden="true"></div>
 </body>
