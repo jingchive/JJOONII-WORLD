@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Let's SiSo – Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../lets-siso.css" />
+</head>
+<body>
+  <!-- 상단 내비(필요 시 제거 가능) -->
+  <header class="topbar">
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../work.html" class="active">Work</a>
+    </nav>
+  </header>
+
+  <!-- 가로 스크롤 컨테이너(모바일에선 세로로 전환) -->
+  <main id="viewport" class="viewport">
+    <!-- 패널 1: 히어로 -->
+    <section class="panel hero snap">
+      <div class="inner">
+        <h1 class="title">Let’s SiSo</h1>
+        <p class="meta">Branding · Web · 2025</p>
+      </div>
+    </section>
+
+    <!-- 패널 2: 큰 이미지 -->
+    <section class="panel snap">
+      <figure class="frame">
+        <img src="../projectimages/lets-siso/01.jpg" alt="Let’s SiSo – Overview 1" />
+        <figcaption>Overview</figcaption>
+      </figure>
+    </section>
+
+    <!-- 패널 3 -->
+    <section class="panel snap">
+      <figure class="frame">
+        <img src="../projectimages/lets-siso/02.jpg" alt="Let’s SiSo – Detail 2" />
+        <figcaption>Detail</figcaption>
+      </figure>
+    </section>
+
+    <!-- 패널 4 (텍스트/모바일 가독 고려) -->
+    <section class="panel text snap">
+      <div class="text-wrap">
+        <h2>Concept</h2>
+        <p>사용자 흐름을 단순화하고, 반복 사용 행동을 강화하는 모듈형 UI를 설계했습니다.</p>
+        <ul class="bullets">
+          <li>Atomic 컴포넌트 시스템</li>
+          <li>접근성(Contrast/Focus) 준수</li>
+          <li>반응형 비주얼 우선 레이아웃</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 패널 5 -->
+    <section class="panel snap">
+      <figure class="frame">
+        <img src="../projectimages/lets-siso/03.jpg" alt="Let’s SiSo – Mobile" />
+        <figcaption>Responsive</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <!-- 페이지 네비(스냅 인디케이터) -->
+  <div class="pager" aria-hidden="true"></div>
+
+  <script src="../lets-siso.js"></script>
+</body>
+</html>

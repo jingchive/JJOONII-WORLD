@@ -1,0 +1,121 @@
+:root{
+    --bg:#0c0c0c;
+    --fg:#ffffff;
+    --muted:rgba(255,255,255,.7);
+    --line:rgba(255,255,255,.15);
+    --gap:50px;
+  }
+  
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    background: radial-gradient(ellipse at center, #3c3c3c 0%, #000 100%);
+    color:var(--fg);
+    font-family: system-ui, -apple-system, "Onest", sans-serif;
+  }
+  
+  /* 상단 바 */
+  .topbar{
+    position:fixed; top:0; left:0; right:0;
+    z-index:1000;
+    display:flex; justify-content:center;
+    padding:14px 16px;
+    background:rgba(0,0,0,.35);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; gap:12px}
+  .nav a{
+    color:var(--fg); text-decoration:none; font-size:13px;
+    padding:6px 10px; border:1px solid var(--line);
+    background:rgba(255,255,255,.08);
+  }
+  .nav a.active,.nav a:hover{background:rgba(255,255,255,.22)}
+  
+  /* 가로형 뷰포트 (데스크톱) */
+  .viewport{
+    position:fixed; inset:0;
+    padding-top:58px; /* topbar 높이 보정 */
+    display:grid;
+    grid-auto-flow:column;           /* 좌→우로 패널 생성 */
+    grid-auto-columns:100vw;         /* 한 패널 = 한 화면 폭 */
+    align-items:stretch;
+    overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory;    /* 가로 스냅 */
+    scrollbar-width:thin;
+  }
+  
+  /* 패널 공통 */
+  .panel{
+    height:calc(100dvh - 58px);      /* 화면 높이 고정(상단바 제외) */
+    padding:0 var(--gap);
+    display:flex; align-items:center; justify-content:center;
+    border-right:1px solid var(--line);
+  }
+  .panel:last-child{border-right:none}
+  .snap{scroll-snap-align:start}
+  
+  /* 히어로 */
+  .hero{background: rgba(255,255,255,.04)}
+  .hero .inner{max-width:1100px; text-align:center}
+  .title{margin:0 0 8px 0; font-size:42px; letter-spacing:.2px}
+  .meta{margin:0; color:var(--muted)}
+  
+  /* 이미지 프레임: 1400×1120 비율 근사 유지 */
+  .frame{
+    width:min(1400px, 84vw);
+    aspect-ratio: 1400 / 1120;
+    margin:0;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .frame img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .frame figcaption{
+    position:absolute; left:-9999px; /* 시각 숨김(접근성 대체 텍스트는 img alt로) */
+  }
+  
+  /* 텍스트 패널 */
+  .panel.text{padding:0 calc(var(--gap) * 2)}
+  .text-wrap{max-width:900px}
+  .text-wrap h2{margin:.2rem 0 1rem 0; font-size:28px}
+  .text-wrap p{line-height:1.6; color:var(--muted)}
+  .bullets{margin:.75rem 0 0 1rem}
+  
+  /* 페이지 인디케이터(선택) */
+  .pager{
+    position:fixed; left:50%; bottom:16px; transform:translateX(-50%);
+    width:180px; height:2px; background:var(--line);
+    z-index:900; pointer-events:none;
+  }
+  
+  /* ────────────────────────────── */
+  /* 모바일/세로형 전환 */
+  @media (max-width: 900px){
+    .viewport{
+      position:relative;
+      padding-top:58px;
+      display:block;                /* 그리드 → 블록 */
+      overflow-x:hidden; overflow-y:auto;
+      scroll-snap-type:y proximity; /* 세로 스냅으로 완만하게 */
+    }
+    .panel{
+      height:auto;                  /* 고정 높이 해제 */
+      min-height:70dvh;             /* 패널 손맛 */
+      padding:24px 16px;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+    }
+    .panel:last-child{border-bottom:none}
+    .frame{
+      width:100%;
+      max-width:100%;
+      aspect-ratio:auto;
+    }
+    .title{font-size:32px}
+    .pager{display:none}
+  }
+  
