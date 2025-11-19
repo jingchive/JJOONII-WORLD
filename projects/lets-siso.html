@@ -157,13 +157,20 @@
         overflow-y:auto;
         scroll-snap-type:y proximity;
       }
-      .panel{
-        height:auto;
-        min-height:70dvh;
-        padding:24px 16px;
-        border-right:none;
-        border-bottom:1px solid var(--line);
-      }
+      .panel.panel-with-header{
+    min-height: auto;
+  }
+  .panel-header{
+    flex: 0 0 auto;
+    max-height: none;
+    padding: 16px 0;
+  }
+  .panel-body{
+    flex: 0 0 auto;
+  }
+  .panel-with-header .frame{
+    height: auto;
+  }
       .panel:last-child{border-bottom:none;}
       .frame{
         width:100%;
@@ -173,6 +180,54 @@
       .pager{display:none;}
       .hero-title{font-size:30px;}
     }
+    /* 텍스트 30% + 이미지 70% 레이아웃용 */
+.panel.panel-with-header{
+  flex-direction: column;      /* 위아래로 쌓기 */
+  align-items: stretch;
+}
+
+.panel-header{
+  flex: 0 0 30%;               /* 높이의 30% 고정 */
+  max-height: 30%;
+  padding: 24px 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;   /* 텍스트를 아래쪽에 모으기 (레퍼런스 느낌) */
+}
+
+.panel-title{
+  margin: 0 0 4px 0;
+  font-size: 22px;
+}
+
+.panel-meta{
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.panel-desc{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.panel-body{
+  flex: 1 1 70%;               /* 나머지 70% 차지 */
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* 이 패널 안에서는 이미지가 영역을 꽉 채우도록 */
+.panel-with-header .frame{
+  width: 100%;
+  height: 100%;
+  max-width: none;             /* 기존 width 제한 풀기 */
+  aspect-ratio: auto;          /* 비율 고정 풀고 영역에 맞추기 */
+}
+
   </style>
 </head>
 <body>
@@ -187,12 +242,20 @@
   <!-- 가로 → 모바일에서는 세로로 바뀌는 뷰포트 -->
   <main class="project-viewport">
     <!-- 패널 1: 히어로 -->
-    <section class="panel hero-panel">
-      <div class="hero-inner">
-        <h1 class="hero-title">Let’s SiSo</h1>
-        <p class="hero-meta">Branding · Web · 2025</p>
-      </div>
-    </section>
+    <section class="panel panel-with-header">
+  <div class="panel-header">
+    <h2 class="panel-title">Let’s SiSo</h2>
+    <p class="panel-meta">2025 · Branding · Web</p>
+    <p class="panel-desc">
+      사용자 흐름을 단순화하고, 반복 사용 행동을 강화하는 모듈형 UI를 설계한 프로젝트입니다.
+    </p>
+  </div>
+  <div class="panel-body">
+    <figure class="frame">
+      <img src="../projectimages/let's-siso.jpg" alt="Let’s SiSo – Overview" />
+    </figure>
+  </div>
+</section>
 
     <!-- 패널 2: 큰 이미지 (지금은 테스트로 메인 썸네일 재사용) -->
     <section class="panel">
