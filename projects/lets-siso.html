@@ -2,77 +2,226 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Let's SiSo – Project</title>
+  <title>Let’s SiSo – Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 기존 공통 스타일 -->
+  <!-- 메인/워크와 동일한 스타일 불러오기 (루트 기준 한 칸 위로 올라감 ../) -->
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="../work.css" />
 
-  <!-- 상세 전용(있다면 마지막에) -->
-  <link rel="stylesheet" href="../lets-siso.css" />
-</head>
+  <!-- 상세페이지 전용 스타일 (inline으로 넣어서 경로 헷갈리는 문제 제거) -->
+  <style>
+    :root{
+      --gap:50px;
+      --line:rgba(255,255,255,.18);
+      --muted:rgba(255,255,255,.72);
+    }
+    body{
+      margin:0;
+      background: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
+      color:#fff;
+      font-family: "Onest", system-ui, -apple-system, sans-serif;
+    }
 
+    /* 상단 바 */
+    .topbar{
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:1000;
+      display:flex;
+      justify-content:center;
+      padding:14px 16px;
+      background:rgba(0,0,0,.35);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-nav{display:flex;gap:12px;}
+    .topbar-nav a{
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.08);
+    }
+    .topbar-nav a.active,
+    .topbar-nav a:hover{
+      background:rgba(255,255,255,.25);
+    }
+
+    /* 가로 스크롤 영역 (데스크톱) */
+    .project-viewport{
+      position:fixed;
+      inset:0;
+      padding-top:58px; /* 상단바 높이만큼 내려줌 */
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:100vw; /* 한 패널 = 한 화면 폭 */
+      align-items:stretch;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:thin;
+    }
+    .panel{
+      height:calc(100dvh - 58px);
+      padding:0 var(--gap);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-right:1px solid var(--line);
+      scroll-snap-align:start;
+    }
+    .panel:last-child{border-right:none;}
+
+    /* 히어로 패널 */
+    .hero-panel{
+      background:rgba(255,255,255,.04);
+    }
+    .hero-inner{
+      max-width:900px;
+      text-align:left;
+    }
+    .hero-title{
+      margin:0 0 8px 0;
+      font-size:38px;
+      letter-spacing:.2px;
+    }
+    .hero-meta{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* 이미지 패널 */
+    .frame{
+      width:min(1400px,84vw);
+      aspect-ratio:1400 / 1120;
+      margin:0;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* 텍스트 설명 패널 */
+    .text-panel{padding:0 calc(var(--gap)*2);}
+    .text-wrap{
+      max-width:760px;
+    }
+    .text-wrap h2{
+      margin:0 0 12px 0;
+      font-size:26px;
+    }
+    .text-wrap p{
+      margin:0 0 12px 0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+    .text-wrap ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* 인디케이터(선택) */
+    .pager{
+      position:fixed;
+      left:50%;
+      bottom:16px;
+      transform:translateX(-50%);
+      width:180px;
+      height:2px;
+      background:var(--line);
+      pointer-events:none;
+    }
+
+    /* 모바일: 세로 스크롤로 전환 */
+    @media (max-width:900px){
+      .project-viewport{
+        position:relative;
+        padding-top:58px;
+        display:block;
+        overflow-x:hidden;
+        overflow-y:auto;
+        scroll-snap-type:y proximity;
+      }
+      .panel{
+        height:auto;
+        min-height:70dvh;
+        padding:24px 16px;
+        border-right:none;
+        border-bottom:1px solid var(--line);
+      }
+      .panel:last-child{border-bottom:none;}
+      .frame{
+        width:100%;
+        max-width:100%;
+        aspect-ratio:auto;
+      }
+      .pager{display:none;}
+      .hero-title{font-size:30px;}
+    }
+  </style>
+</head>
 <body>
-  <!-- 상단 내비(필요 시 제거 가능) -->
+  <!-- 상단 네비 -->
   <header class="topbar">
-    <nav class="nav">
+    <nav class="topbar-nav">
       <a href="../index.html">Home</a>
       <a href="../work.html" class="active">Work</a>
     </nav>
   </header>
 
-  <!-- 가로 스크롤 컨테이너(모바일에선 세로로 전환) -->
-  <main id="viewport" class="viewport">
+  <!-- 가로 → 모바일에서는 세로로 바뀌는 뷰포트 -->
+  <main class="project-viewport">
     <!-- 패널 1: 히어로 -->
-    <section class="panel hero snap">
-      <div class="inner">
-        <h1 class="title">Let’s SiSo</h1>
-        <p class="meta">Branding · Web · 2025</p>
+    <section class="panel hero-panel">
+      <div class="hero-inner">
+        <h1 class="hero-title">Let’s SiSo</h1>
+        <p class="hero-meta">Branding · Web · 2025</p>
       </div>
     </section>
 
-    <!-- 패널 2: 큰 이미지 -->
-    <section class="panel snap">
+    <!-- 패널 2: 큰 이미지 (지금은 테스트로 메인 썸네일 재사용) -->
+    <section class="panel">
       <figure class="frame">
-        <img src="../projectimages/lets-siso/01.jpg" alt="Let’s SiSo – Overview 1" />
-        <figcaption>Overview</figcaption>
+        <img src="../projectimages/let's-siso.jpg" alt="Let’s SiSo – Overview" />
       </figure>
     </section>
 
-    <!-- 패널 3 -->
-    <section class="panel snap">
-      <figure class="frame">
-        <img src="../projectimages/lets-siso/02.jpg" alt="Let’s SiSo – Detail 2" />
-        <figcaption>Detail</figcaption>
-      </figure>
-    </section>
-
-    <!-- 패널 4 (텍스트/모바일 가독 고려) -->
-    <section class="panel text snap">
+    <!-- 패널 3: 설명 -->
+    <section class="panel text-panel">
       <div class="text-wrap">
         <h2>Concept</h2>
         <p>사용자 흐름을 단순화하고, 반복 사용 행동을 강화하는 모듈형 UI를 설계했습니다.</p>
-        <ul class="bullets">
+        <ul>
           <li>Atomic 컴포넌트 시스템</li>
-          <li>접근성(Contrast/Focus) 준수</li>
+          <li>접근성(Contrast / Focus) 준수</li>
           <li>반응형 비주얼 우선 레이아웃</li>
         </ul>
       </div>
     </section>
 
-    <!-- 패널 5 -->
-    <section class="panel snap">
+    <!-- 패널 4: 또 다른 이미지 (필요하면 나중에 다른 이미지로 교체) -->
+    <section class="panel">
       <figure class="frame">
-        <img src="../projectimages/lets-siso/03.jpg" alt="Let’s SiSo – Mobile" />
-        <figcaption>Responsive</figcaption>
+        <img src="../projectimages/let's-siso.jpg" alt="Let’s SiSo – Responsive View" />
       </figure>
     </section>
   </main>
 
-  <!-- 페이지 네비(스냅 인디케이터) -->
   <div class="pager" aria-hidden="true"></div>
-
-  <script src="../lets-siso.js"></script>
 </body>
 </html>
