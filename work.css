@@ -2,7 +2,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: radial-gradient(ellipse at center, #545454 0%, #ffffff 100%);
+    background: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
     color: #fff;
     font-family: "Onest", system-ui, -apple-system, sans-serif;
   }
