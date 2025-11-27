@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>시글로 – 시공간의 건축디자인 기행 in JAPAN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../work.css" />
+
+  <style>
+    :root {
+      --ls-bg: radial-gradient(ellipse at center, #545454 0%, #ffffff 100%);
+      --ls-fg: #ffffff;
+      --ls-muted: rgba(255, 255, 255, 0.75);
+      --ls-line: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color: var(--ls-fg);
+      font-family: "Onest", system-ui, -apple-system, sans-serif;
+    }
+
+    .ls-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--ls-line);
+    }
+
+    .ls-topbar-nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ls-topbar-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid var(--ls-line);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .ls-topbar-nav a.active,
+    .ls-topbar-nav a:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .ls-viewport {
+      position: fixed;
+      inset: 0;
+      padding-top: 58px;
+      display: flex;
+      justify-content: center;
+      background: var(--ls-bg);
+    }
+
+    .ls-panel {
+      width: 100%;
+      max-width: 1500px;
+      height: calc(100vh - 58px);
+      display: flex;
+      flex-direction: column;
+      padding: 0 60px;
+    }
+
+    .ls-header {
+      flex: 0 0 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .ls-title {
+      margin: 0 0 4px 0;
+      font-size: 32px;
+      letter-spacing: 0.2px;
+    }
+
+    .ls-meta {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: var(--ls-muted);
+    }
+
+    .ls-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ls-muted);
+      max-width: 720px;
+    }
+
+    .ls-strip {
+      flex: 0 0 70%;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    .ls-frame {
+      flex: 0 0 auto;
+      width: 1400px;
+      height: 100%;
+      margin: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--ls-line);
+      overflow: hidden;
+      scroll-snap-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ls-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .ls-viewport {
+        position: static;
+        padding-top: 56px;
+      }
+
+      .ls-panel {
+        height: auto;
+        padding: 0 16px 40px;
+      }
+
+      .ls-header {
+        flex: 0 0 auto;
+        margin-bottom: 16px;
+      }
+
+      .ls-title {
+        font-size: 26px;
+      }
+
+      .ls-strip {
+        flex: 0 0 auto;
+        flex-direction: column;
+        gap: 16px;
+        overflow-x: hidden;
+        overflow-y: visible;
+        scroll-snap-type: none;
+      }
+
+      .ls-frame {
+        width: 100%;
+        height: auto;
+      }
+
+      .ls-frame img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="ls-topbar">
+    <nav class="ls-topbar-nav">
+      <a href="../index.html">Home</a>
+      <a href="../work.html" class="active">Work</a>
+    </nav>
+  </header>
+
+  <main class="ls-viewport">
+    <section class="ls-panel">
+      <div class="ls-header">
+        <h1 class="ls-title">시글로 – 시공간의 건축디자인 기행 in JAPAN</h1>
+        <p class="ls-meta">2024 · Editorial Design · Travelogue</p>
+        <p class="ls-desc">
+          성신여대 디자인과 공간디자인 소모임 ‘시공간’ 6명이 일본 도쿄의 건축·공간 디자인 기업을
+          탐방한 기록을 담은 기행집입니다. 각자가 인터뷰하고 싶은 글로벌 스튜디오를 직접 컨택하고,
+          현장을 방문해 나눈 대화를 텍스트와 사진, 그래픽 요소로 편집했습니다. 방문 도시와 기업의
+          리듬에 맞춰 챕터 구조를 나누고, 동선과 시선이 흐르듯 페이지가 넘어가도록 레이아웃을 구성해
+          ‘시공간 속을 걷는 독서 경험’을 목표로 디자인했습니다.
+        </p>
+      </div>
+
+      <div class="ls-strip">
+        <figure class="ls-frame">
+          <img src="../projectimages/siglo/1.jpg" alt="시글로 – 표지 및 타이포그래피" />
+        </figure>
+        <figure class="ls-frame">
+          <img src="../projectimages/siglo/2.jpg" alt="시글로 – 챕터 인트로 페이지" />
+        </figure>
+        <figure class="ls-frame">
+          <img src="../projectimages/siglo/3.jpg" alt="시글로 – 인터뷰 지면 구성" />
+        </figure>
+        <figure class="ls-frame">
+          <img src="../projectimages/siglo/4.jpg" alt="시글로 – 기업 탐방 사진과 레이아웃" />
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
