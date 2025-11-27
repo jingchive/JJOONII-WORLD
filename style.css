@@ -3,7 +3,7 @@ html, body {
     margin: 0;
     height: 100%;
     overflow: hidden;
-    background: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
+    background: radial-gradient(ellipse at center, #545454 0%, #ffffff 100%);
   }
 
   .nav-btn{
@@ -102,3 +102,12 @@ html, body {
     display: none;
   }
   
+@media (max-width: 900px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;   /* 모바일에서만 세로 스크롤 허용 */
+  }
+}

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>전시 'SHIFT+1: 다음 감각을 느끼시오' 웹 아이덴티티 디자인</title>
+  <title>SHIFT vol.1 – Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- 공통 스타일 -->
@@ -69,29 +69,32 @@
     background: rgba(255, 255, 255, 0.25);
   }
 
- /* 상단 네비를 제외한 나머지는 일반 문서처럼 세로 스크롤 */
+ /* 전체 상세페이지 뷰포트 */
 .ls-viewport {
-  margin-top: 58px;          /* 네비 높이만큼 내려주기 */
-  padding: 24px 16px 40px;
+  position: fixed;
+  inset: 0;               /* 화면 전체 덮기 */
+  padding-top: 58px;      /* 상단 네비 높이만큼 */
   display: flex;
   justify-content: center;
 }
 
+/* 가운데 콘텐츠 패널 */
 .ls-panel {
   width: 100%;
-  max-width: 1500px;
+  max-width: 1500px;      /* 중앙 고정 폭 */
+  height: calc(100vh - 58px);   /* 네비 뺀 나머지 높이 전체 사용 */
   display: flex;
   flex-direction: column;
-  padding: 0 50px;           /* 변수 쓰고 있으면 var(--ls-gap) 그대로 */
+  padding: 0 60px;
 }
 
-  /* 상단 프로젝트 정보 영역 */
-  .ls-header {
-    margin-bottom: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+/* 상단 프로젝트 정보 영역 (텍스트 30%) */
+.ls-header {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
   .ls-title {
     margin: 0 0 4px 0;
@@ -112,82 +115,77 @@
     color: var(--ls-muted);
     max-width: 680px;
   }
+/* 하단 이미지 스트립 영역 (70%) */
+.ls-strip {
+  flex: 0 0 70%;
+  display: flex;
+  gap: 40px;
+  align-items: center;       /* 세로 가운데 정렬 */
+  overflow-x: auto;          /* 좌우 스크롤 */
+  overflow-y: hidden;        /* 위아래는 잘라줌 */
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
 
-  /* 🔹 하단 가로 이미지 스트립 */
+/* 각 이미지 패널 (폭/높이 고정 박스) */
+.ls-frame {
+  flex: 0 0 auto;
+  width: 1400px;             /* ✅ PC에서 패널 폭 고정 */
+  height: 100%;              /* ✅ strip 높이(=뷰포트 70%)에 꽉 차게 */
+  margin: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 패널 안 이미지 – 박스에 맞게 잘라서 표시 */
+.ls-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* ✅ 폭/높이 고정, 비율 유지 + 잘림 허용 */
+  display: block;
+}
+/* ===== 모바일 전용 레이아웃 ===== */
+@media (max-width: 900px) {
+  .ls-viewport {
+    position: static;         /* ✅ 화면 고정 해제 */
+    padding-top: 56px;
+  }
+
+  .ls-panel {
+    height: auto;             /* ✅ 고정 높이 해제 */
+    padding: 0 16px 40px;
+  }
+
+  .ls-header {
+    flex: 0 0 auto;
+    margin-bottom: 16px;
+  }
+
   .ls-strip {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;       /* 이미지 상단 기준 */
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    padding-bottom: 8px;
+    flex: 0 0 auto;
+    flex-direction: column;   /* ✅ 세로로 한 장씩 */
+    gap: 16px;
+    overflow-x: hidden;
+    overflow-y: visible;      /* ✅ 아래로 스크롤 */
+    scroll-snap-type: none;
   }
 
   .ls-frame {
-    flex: 0 0 auto;
-    max-width: 1080px;             /* 폭 최대 1080px */
     width: 100%;
-    margin: 0;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--ls-line);
-    overflow: hidden;
-    scroll-snap-align: center;
-    display: flex;
-    align-items: flex-start;       /* 위에서부터 시작 */
-    justify-content: center;
+    height: auto;             /* ✅ 고정 높이 해제 */
   }
 
   .ls-frame img {
-    width: 100%;                   /* 폭 기준 1080px 맞추기 */
-    height: auto;                  /* 세로는 비율대로 자동 */
-    object-fit: contain;           /* 잘리지 않도록 */
-    display: block;
+    width: 100%;
+    height: auto;             /* ✅ 비율대로 세로 늘어나기 */
+    object-fit: contain;      /* 잘림 없이 꽉 차게 보고 싶으면 contain */
   }
-
-  /* 모바일: 세로 스크롤 리스트 느낌 */
-  @media (max-width: 900px) {
-    .ls-viewport {
-      margin-top: 58px;
-      padding: 16px 12px 32px;
-    }
-
-    .ls-panel {
-      padding: 0 8px;
-    }
-
-    .ls-title {
-      font-size: 26px;
-    }
-
-    .ls-strip {
-      flex-direction: column;
-      gap: 16px;
-      overflow-x: hidden;
-      overflow-y: visible;
-      scroll-snap-type: none;
-    }
-
-    .ls-frame {
-      max-width: 100%;
-    }
-  }
-  /* ✅ 상세 페이지(가로 스트립) 안 이미지 비율 강제 오버라이드 */
-.ls-strip .ls-frame {
-  max-width: 1080px;
-  width: 100%;
-  height: auto !important;
-  aspect-ratio: auto !important;
 }
-
-.ls-strip .ls-frame img {
-  width: 100%;
-  height: auto !important;
-  aspect-ratio: auto !important;
-  object-fit: contain !important;
-}
-
 </style>
 
 </head>
