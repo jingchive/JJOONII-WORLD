@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SHIFT vol.1 – Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 공통 스타일 -->
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../work.css" />
+
+  <!-- 이 페이지 전용 스타일 (lets-siso와 동일 구조) -->
+  <style>
+    :root {
+      --ls-bg: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
+      --ls-fg: #ffffff;
+      --ls-muted: rgba(255, 255, 255, 0.75);
+      --ls-line: rgba(255, 255, 255, 0.18);
+      --ls-gap: 50px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      background: var(--ls-bg);
+      color: var(--ls-fg);
+      font-family: "Onest", system-ui, -apple-system, sans-serif;
+    }
+
+    .ls-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--ls-line);
+    }
+
+    .ls-topbar-nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ls-topbar-nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid var(--ls-line);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .ls-topbar-nav a.active,
+    .ls-topbar-nav a:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .ls-viewport {
+      position: fixed;
+      inset: 0;
+      padding-top: 58px;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .ls-panel {
+      width: 100%;
+      height: calc(100dvh - 58px);
+      display: flex;
+      flex-direction: column;
+      padding: 0 var(--ls-gap);
+    }
+
+    .ls-header {
+      flex: 0 0 30%;
+      max-height: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .ls-title {
+      margin: 0 0 4px 0;
+      font-size: 32px;
+      letter-spacing: 0.2px;
+    }
+
+    .ls-meta {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: var(--ls-muted);
+    }
+
+    .ls-desc {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ls-muted);
+      max-width: 680px;
+    }
+
+    .ls-strip {
+  flex: 1 1 70%;
+  min-height: 0;
+  margin-top: 18px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;   /* ✅ 이미지 높이에 맞게 위에서 시작 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+
+    .ls-frame {
+  flex: 0 0 auto;
+  /* height: 100%;           ✅ 삭제 */
+  /* aspect-ratio: 1400 / 1120;  ✅ 삭제 */
+  max-width: 1080px;          /* ✅ 최대 가로 1080px */
+  width: 100%;                /* 스트립 안에서 가로 꽉 채우기 */
+  margin: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--ls-line);
+  overflow: hidden;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: flex-start;     /* 위쪽부터 이미지 시작 */
+  justify-content: center;
+}
+
+
+    .ls-frame img {
+  width: 100%;
+  height: auto;           /* ✅ 세로는 비율 유지하며 자동 */
+  object-fit: contain;    /* 혹시 모를 잘림 방지(여유) */
+  display: block;
+}
+
+
+    @media (max-width: 900px) {
+      .ls-viewport {
+        position: relative;
+        padding-top: 58px;
+        align-items: flex-start;
+      }
+
+      .ls-panel {
+        height: auto;
+        min-height: auto;
+        padding: 24px 16px 40px;
+      }
+
+      .ls-header {
+        flex: 0 0 auto;
+        max-height: none;
+        margin-bottom: 16px;
+      }
+
+      .ls-title {
+        font-size: 26px;
+      }
+
+      .ls-strip {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-snap-type: none;
+      }
+
+      .ls-frame {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="ls-topbar">
+    <nav class="ls-topbar-nav">
+      <a href="../index.html">Home</a>
+      <a href="../work.html" class="active">Work</a>
+    </nav>
+  </header>
+
+  <main class="ls-viewport">
+    <section class="ls-panel">
+      <div class="ls-header">
+        <h1 class="ls-title"> 전시 'SHIFT+1 : 다음 감각을 느끼시오' 웹 아카이브 </h1>
+        <p class="ls-meta">2024 · Exhibition Identity · Web archive</p>
+        <p class="ls-desc">
+          전시 'SHIFT+1 : 다음 감각을 느끼시오'의 모바일 리플렛이자 웹 도록으로 기능하는 전시 웹페이지를 기획, 제작, 운영하였습니다.
+        </p>
+      </div>
+
+      <div class="ls-strip">
+        <figure class="ls-frame">
+          <img src="/JJOONII-WORLD/projectimages/shift1/1.jpeg" alt="SHIFT vol.1 – Cover" />
+        </figure>
+
+        <figure class="ls-frame">
+          <img src="/JJOONII-WORLD/projectimages/shift1/2.jpeg" alt="SHIFT vol.1 – Spread 1" />
+        </figure>
+
+        <figure class="ls-frame">
+          <img src="/JJOONII-WORLD/projectimages/shift1/3.jpeg" alt="SHIFT vol.1 – Spread 2" />
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
