@@ -11,188 +11,185 @@
 
   <!-- 이 페이지 전용 스타일 (lets-siso와 동일 구조) -->
   <style>
-    :root {
-      --ls-bg: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
-      --ls-fg: #ffffff;
-      --ls-muted: rgba(255, 255, 255, 0.75);
-      --ls-line: rgba(255, 255, 255, 0.18);
-      --ls-gap: 50px;
-    }
+  :root {
+    --ls-bg: radial-gradient(ellipse at center, #545454 0%, #000000 100%);
+    --ls-fg: #ffffff;
+    --ls-muted: rgba(255, 255, 255, 0.75);
+    --ls-line: rgba(255, 255, 255, 0.18);
+    --ls-gap: 50px;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      background: var(--ls-bg);
-      color: var(--ls-fg);
-      font-family: "Onest", system-ui, -apple-system, sans-serif;
-    }
+  body {
+    background: var(--ls-bg);
+    color: var(--ls-fg);
+    font-family: "Onest", system-ui, -apple-system, sans-serif;
+  }
 
-    .ls-topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: center;
-      padding: 14px 16px;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid var(--ls-line);
-    }
+  /* 상단 고정 네비게이션 */
+  .ls-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--ls-line);
+  }
 
-    .ls-topbar-nav {
-      display: flex;
-      gap: 12px;
-    }
+  .ls-topbar-nav {
+    display: flex;
+    gap: 12px;
+  }
 
-    .ls-topbar-nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 13px;
-      padding: 6px 10px;
-      border: 1px solid var(--ls-line);
-      background: rgba(255, 255, 255, 0.08);
-    }
+  .ls-topbar-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 10px;
+    border: 1px solid var(--ls-line);
+    background: rgba(255, 255, 255, 0.08);
+  }
 
-    .ls-topbar-nav a.active,
-    .ls-topbar-nav a:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
+  .ls-topbar-nav a.active,
+  .ls-topbar-nav a:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
 
-    .ls-viewport {
-      position: fixed;
-      inset: 0;
-      padding-top: 58px;
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-    }
-
-    .ls-panel {
-      width: 100%;
-      height: calc(100dvh - 58px);
-      display: flex;
-      flex-direction: column;
-      padding: 0 var(--ls-gap);
-    }
-
-    .ls-header {
-      flex: 0 0 30%;
-      max-height: 30%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .ls-title {
-      margin: 0 0 4px 0;
-      font-size: 32px;
-      letter-spacing: 0.2px;
-    }
-
-    .ls-meta {
-      margin: 0 0 8px 0;
-      font-size: 13px;
-      color: var(--ls-muted);
-    }
-
-    .ls-desc {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--ls-muted);
-      max-width: 680px;
-    }
-
-    .ls-strip {
-  flex: 1 1 70%;
-  min-height: 0;
-  margin-top: 18px;
+ /* 상단 네비를 제외한 나머지는 일반 문서처럼 세로 스크롤 */
+.ls-viewport {
+  margin-top: 58px;          /* 네비 높이만큼 내려주기 */
+  padding: 24px 16px 40px;
   display: flex;
-  gap: 40px;
-  align-items: flex-start;   /* ✅ 이미지 높이에 맞게 위에서 시작 */
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-}
-
-
-    .ls-frame {
-  flex: 0 0 auto;
-  /* height: 100%;           ✅ 삭제 */
-  /* aspect-ratio: 1400 / 1120;  ✅ 삭제 */
-  max-width: 1080px;          /* ✅ 최대 가로 1080px */
-  width: 100%;                /* 스트립 안에서 가로 꽉 채우기 */
-  margin: 0;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--ls-line);
-  overflow: hidden;
-  scroll-snap-align: center;
-  display: flex;
-  align-items: flex-start;     /* 위쪽부터 이미지 시작 */
   justify-content: center;
 }
 
-
-    .ls-frame img {
+.ls-panel {
   width: 100%;
-  height: auto;           /* ✅ 세로는 비율 유지하며 자동 */
-  object-fit: contain;    /* 혹시 모를 잘림 방지(여유) */
-  display: block;
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 50px;           /* 변수 쓰고 있으면 var(--ls-gap) 그대로 */
 }
 
+  /* 상단 프로젝트 정보 영역 */
+  .ls-header {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 
-    @media (max-width: 900px) {
-      .ls-viewport {
-        position: relative;
-        padding-top: 58px;
-        align-items: flex-start;
-      }
+  .ls-title {
+    margin: 0 0 4px 0;
+    font-size: 32px;
+    letter-spacing: 0.2px;
+  }
 
-      .ls-panel {
-        height: auto;
-        min-height: auto;
-        padding: 24px 16px 40px;
-      }
+  .ls-meta {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: var(--ls-muted);
+  }
 
-      .ls-header {
-        flex: 0 0 auto;
-        max-height: none;
-        margin-bottom: 16px;
-      }
+  .ls-desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ls-muted);
+    max-width: 680px;
+  }
 
-      .ls-title {
-        font-size: 26px;
-      }
+  /* 🔹 하단 가로 이미지 스트립 */
+  .ls-strip {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;       /* 이미지 상단 기준 */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 8px;
+  }
 
-      .ls-strip {
-        flex: 0 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        scroll-snap-type: none;
-      }
+  .ls-frame {
+    flex: 0 0 auto;
+    max-width: 1080px;             /* 폭 최대 1080px */
+    width: 100%;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--ls-line);
+    overflow: hidden;
+    scroll-snap-align: center;
+    display: flex;
+    align-items: flex-start;       /* 위에서부터 시작 */
+    justify-content: center;
+  }
 
-      .ls-frame {
-        width: 100%;
-        height: auto;
-        aspect-ratio: auto;
-      }
+  .ls-frame img {
+    width: 100%;                   /* 폭 기준 1080px 맞추기 */
+    height: auto;                  /* 세로는 비율대로 자동 */
+    object-fit: contain;           /* 잘리지 않도록 */
+    display: block;
+  }
+
+  /* 모바일: 세로 스크롤 리스트 느낌 */
+  @media (max-width: 900px) {
+    .ls-viewport {
+      margin-top: 58px;
+      padding: 16px 12px 32px;
     }
-  </style>
+
+    .ls-panel {
+      padding: 0 8px;
+    }
+
+    .ls-title {
+      font-size: 26px;
+    }
+
+    .ls-strip {
+      flex-direction: column;
+      gap: 16px;
+      overflow-x: hidden;
+      overflow-y: visible;
+      scroll-snap-type: none;
+    }
+
+    .ls-frame {
+      max-width: 100%;
+    }
+  }
+  /* ✅ 상세 페이지(가로 스트립) 안 이미지 비율 강제 오버라이드 */
+.ls-strip .ls-frame {
+  max-width: 1080px;
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+}
+
+.ls-strip .ls-frame img {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  object-fit: contain !important;
+}
+
+</style>
+
 </head>
 <body>
   <header class="ls-topbar">
