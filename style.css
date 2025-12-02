@@ -7,10 +7,9 @@ html, body {
   }
 
   .nav-btn{
-    font-family: "Onest", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
+      font-family: "futura-pt", sans-serif;
+      font-weight: 400;
+      font-style: normal;
   }
   
   #bg {
@@ -24,10 +23,9 @@ html, body {
   }
 
   #project-info {
-    font-family: "Onest", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 300;
-    font-style: normal;
+    font-family: "futura-pt", sans-serif;
+      font-weight: 400;
+      font-style: normal;
   }
   
   
