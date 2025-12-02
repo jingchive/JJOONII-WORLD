@@ -117,3 +117,36 @@ html, body {
     overflow-y: auto;   /* 모바일에서만 세로 스크롤 허용 */
   }
 }
+
+/* ===========================
+   🔥 Mobile UI Scale Adjust
+   화면 폭 900px 이하에서 제목/메뉴 축소
+   =========================== */
+@media (max-width: 900px) {
+
+  /* 🔹 제목 JJOONII ARCHIVE */
+  #site-title {
+    top: 20px;            /* 조금 내려서 안정감 */
+    left: 16px;
+    font-size: 24px;      /* 기존 40px → 24px */
+    letter-spacing: 0.5px;
+  }
+
+  /* 🔹 네비게이션 컨테이너 */
+  #floating-nav {
+    top: 60px;            /* 제목 아래에 자연스럽게 배치 */
+    left: 16px;
+    transform: none;      /* PC에서 중앙 정렬 하던 transform 제거 */
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 10px;
+    backdrop-filter: blur(6px);
+  }
+
+  /* 🔹 네비 개별 버튼 */
+  .nav-btn {
+    font-size: 10px;      /* 기존 12px → 10px */
+    padding: 4px 6px;
+    letter-spacing: 0.2px;
+  }
+}
