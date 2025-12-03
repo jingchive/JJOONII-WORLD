@@ -13,7 +13,7 @@ html, body {
   margin: 0;
   z-index: 1200;  /* 네비보다 위 */
   font-family: "futura-pt", sans-serif;
-  font-size: 40px;
+  font-size: 54px;
   letter-spacing: 1px;
   color: rgba(36, 36, 36, 1);
   pointer-events: none; /* 클릭해도 3D 회전 방해 안함 */
@@ -39,7 +39,7 @@ html, body {
     background: rgba(255, 255, 255, 0.1);
     color: rgba(36, 36, 36, 1);
     font-family: "futura-pt", sans-serif;
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 300;
     letter-spacing: 0.3px;
     border-radius: 0px;
@@ -127,7 +127,7 @@ html, body {
   /* 🔹 제목 JJOONII ARCHIVE */
   #site-title {
     top: 20px;            /* 조금 내려서 안정감 */
-    left: 16px;
+    left: 10%;
     font-size: 24px;      /* 기존 40px → 24px */
     letter-spacing: 0.5px;
   }
@@ -135,17 +135,17 @@ html, body {
   /* 🔹 네비게이션 컨테이너 */
   #floating-nav {
     top: 60px;            /* 제목 아래에 자연스럽게 배치 */
-    left: 16px;
+    left: 90%;
     transform: none;      /* PC에서 중앙 정렬 하던 transform 제거 */
     flex-direction: column;
     gap: 8px;
-    padding: 8px 10px;
+    padding: 5px 10px;
     backdrop-filter: blur(6px);
   }
 
   /* 🔹 네비 개별 버튼 */
   .nav-btn {
-    font-size: 10px;      /* 기존 12px → 10px */
+    font-size: 12px;     
     padding: 4px 6px;
     letter-spacing: 0.2px;
   }
