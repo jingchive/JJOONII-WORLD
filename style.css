@@ -9,7 +9,7 @@ html, body {
 #site-title {
   position: fixed;
   top: 10%;
-  left: 10%;
+  left: 30px;
   margin: 0;
   z-index: 1200;  /* 네비보다 위 */
   font-family: "futura-pt", sans-serif;
@@ -23,10 +23,11 @@ html, body {
 #floating-nav {
     position: absolute;
     top: 5%;                
-    left: 10%;
+    left: 30px;
     display: flex;
     gap: 20px;
     padding: 5px 10px;
+    padding-left: 0;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 0px;
     backdrop-filter: blur(10px);
@@ -134,7 +135,7 @@ html, body {
   /* 🔹 네비게이션 컨테이너 */
   #floating-nav {
     top: 60px;            /* 제목 아래에 자연스럽게 배치 */
-    left: 90%;
+    right: 10%;
     transform: none;      /* PC에서 중앙 정렬 하던 transform 제거 */
     flex-direction: column;
     gap: 8px;
