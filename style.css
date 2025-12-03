@@ -9,7 +9,7 @@ html, body {
 #site-title {
   position: fixed;
   top: 10%;
-  left: 20px;
+  left: 10%;
   margin: 0;
   z-index: 1200;  /* 네비보다 위 */
   font-family: "futura-pt", sans-serif;
@@ -24,10 +24,9 @@ html, body {
     position: absolute;
     top: 5%;                
     left: 10%;
-    transform: translateX(-50%,-50%);
     display: flex;
     gap: 20px;
-    padding: 5px 5px;
+    padding: 5px 10px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 0px;
     backdrop-filter: blur(10px);
@@ -40,7 +39,7 @@ html, body {
     color: rgba(36, 36, 36, 1);
     font-family: "futura-pt", sans-serif;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 500;
     letter-spacing: 0.3px;
     border-radius: 0px;
     padding: 3px 5px;
