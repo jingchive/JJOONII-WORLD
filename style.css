@@ -21,10 +21,10 @@ html, body {
 
 /* === Floating Navigation (GND) === */
 #floating-nav {
-    position: fixed;
+    position: absolute;
     top: 5%;                
     left: 10%;
-    transform: translateX(-10%);
+    transform: translateX(-50%,-50%);
     display: flex;
     gap: 20px;
     padding: 5px 5px;
